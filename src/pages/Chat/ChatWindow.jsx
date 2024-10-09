@@ -91,25 +91,28 @@ function ChatWindow() {
     }
   };
 
-  const handleImageUpload = async (e) => {
+  const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const storageRef = ref(storage, `images/${selectedConversationId}/${file.name}`);
+    const fileExtension = file.name.split('.').pop(); // Get the file extension
+    const storageRef = ref(storage, `files/${selectedConversationId}/${file.name}`);
     await uploadBytes(storageRef, file);
 
-    // Get the URL of the uploaded image
+    // Get the URL of the uploaded file
     const downloadURL = await getDownloadURL(storageRef);
 
-    // Save the image URL to Firestore
+    // Save the file URL to Firestore along with the file type and name
     if (user && selectedConversationId) {
       const messagesRef = collection(db, "conversations", selectedConversationId, "messages");
       await addDoc(messagesRef, {
-        text: "", // No text content since it's an image
+        text: "", // No text content since it's a file
         senderId: user.uid,
         senderEmail: user.email,
         timestamp: new Date(),
-        imageUrl: downloadURL, // Store image URL in Firestore
+        fileUrl: downloadURL, // Store file URL in Firestore
+        fileName: file.name, // Store file name
+        fileType: fileExtension, // Store file type (e.g., docx, txt)
       });
 
       const conversationRef = doc(db, "conversations", selectedConversationId);
@@ -188,6 +191,12 @@ function ChatWindow() {
               {msg.formattedTime && <span style={{ marginLeft: "10px", color: "#757575" }}>({msg.formattedTime})</span>}
               {/* Display image if the message contains an image URL */}
               {msg.imageUrl && <img src={msg.imageUrl} alt="Sent Image" style={{ maxWidth: "200px", marginTop: "10px" }} />}
+              {/* Display link if the message contains a file URL */}
+              {msg.fileUrl && (
+                <a href={msg.fileUrl} target="_blank" rel="noopener noreferrer" style={{ display: "block", marginTop: "10px", color: "#1e90ff" }}>
+                  {msg.fileName || "Download File"}
+                </a>
+              )}
             </div>
           ))}
         </div>
@@ -204,15 +213,15 @@ function ChatWindow() {
               className="chat-input"
             />
 
-            {/* File input for image upload */}
+            {/* File input for image and file upload */}
             <input
               type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
+              accept="image/*,.pdf,.doc,.docx,.txt"
+              onChange={handleFileUpload}
               style={{ display: "none" }}
-              id="image-upload"
+              id="file-upload"
             />
-            <label htmlFor="image-upload" className="chat-upload-button">
+            <label htmlFor="file-upload" className="chat-upload-button">
               +
             </label>
 
