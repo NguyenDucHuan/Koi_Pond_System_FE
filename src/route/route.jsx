@@ -17,6 +17,7 @@ import CreateBlog from "../pages/Admin/CreateBlog ";
 import BlogList from "../components/BlogList";
 import BlogDetail from "../components/BlogDetail";
 import Contact from "../pages/Contact";
+import AdminBlogList from "../pages/Admin/AdminBlogList";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -87,8 +88,8 @@ export const routes = createBrowserRouter([
         element: <CreateBlog />,
       },
       {
-        path: "create-blog",
-        element: <CreateBlog />,
+        path: "manage-blog",
+        element: <AdminBlogList />,
       },
     ],
   },

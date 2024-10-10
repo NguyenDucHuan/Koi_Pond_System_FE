@@ -18,7 +18,11 @@ const AdminLayout = () => {
                     </a>
                     <a href="/admin/create-blog" className="flex items-center py-2 px-4 text-gray-600 hover:bg-gray-200">
                         <FiFileText className="mr-2" /> {/* Blog icon */}
-                        Blog
+                        Create Blog
+                    </a>
+                    <a href="/admin/manage-blog" className="flex items-center py-2 px-4 text-gray-600 hover:bg-gray-200">
+                        <FiFileText className="mr-2" /> {/* Blog icon */}
+                        Manage Blog
                     </a>
                     {/* Add more admin navigation items with icons as needed */}
                 </nav>
