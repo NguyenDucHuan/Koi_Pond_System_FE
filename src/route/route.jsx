@@ -18,6 +18,7 @@ import BlogList from "../components/BlogList";
 import BlogDetail from "../components/BlogDetail";
 import Contact from "../pages/Contact";
 import AdminBlogList from "../pages/Admin/AdminBlogList";
+import EditBlog from "../pages/Admin/EditBlog";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -90,6 +91,10 @@ export const routes = createBrowserRouter([
       {
         path: "manage-blog",
         element: <AdminBlogList />,
+      },
+      {
+        path: "edit-blog/:id",  // New route for editing a blog
+        element: <EditBlog />,
       },
     ],
   },

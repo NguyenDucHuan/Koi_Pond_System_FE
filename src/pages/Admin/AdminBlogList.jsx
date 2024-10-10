@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-// Component to display and manage blog posts
 const AdminBlogList = () => {
     const [blogs, setBlogs] = useState([]);
+    const navigate = useNavigate();
 
-    // Retrieve blogs from localStorage when the component mounts
     useEffect(() => {
         const storedBlogs = JSON.parse(localStorage.getItem('blogs')) || [];
         setBlogs(storedBlogs);
     }, []);
 
-    // Function to delete a blog
     const handleDelete = (id) => {
         if (window.confirm('Are you sure you want to delete this blog?')) {
             const updatedBlogs = blogs.filter((blog) => blog.id !== id);
@@ -19,17 +18,8 @@ const AdminBlogList = () => {
         }
     };
 
-    // Function to edit a blog (for simplicity, only title and content can be edited)
     const handleEdit = (id) => {
-        const title = prompt('Enter new title:');
-        const content = prompt('Enter new content:');
-        if (title && content) {
-            const updatedBlogs = blogs.map((blog) =>
-                blog.id === id ? { ...blog, title, content } : blog
-            );
-            setBlogs(updatedBlogs);
-            localStorage.setItem('blogs', JSON.stringify(updatedBlogs));
-        }
+        navigate(`/admin/edit-blog/${id}`);
     };
 
     return (
@@ -57,7 +47,6 @@ const AdminBlogList = () => {
                                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
                                 }}
                             >
-                                {/* Image Section */}
                                 {blog.image && (
                                     <div className="w-1/3">
                                         <img
@@ -67,8 +56,6 @@ const AdminBlogList = () => {
                                         />
                                     </div>
                                 )}
-
-                                {/* Text Section */}
                                 <div className="w-2/3">
                                     <h3 className="text-2xl font-semibold mb-2">{blog.title}</h3>
 
