@@ -60,7 +60,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-indigo-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-r from-orange-100 to-yellow-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl w-full bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="bg-gray-50 py-6 px-8 border-b border-gray-200">
           <h2 className="text-3xl font-extrabold text-gray-900 text-center">
@@ -141,7 +141,7 @@ const RegisterPage = () => {
             <div className="mt-6">
               <button
                 type="submit"
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 Đăng ký
               </button>
@@ -153,7 +153,7 @@ const RegisterPage = () => {
               Bạn đã có tài khoản?{" "}
               <Link
                 to="/login"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
+                className="font-medium text-yellow-500 hover:text-yellow-700"
               >
                 Đăng nhập
               </Link>

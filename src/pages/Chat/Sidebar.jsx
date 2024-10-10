@@ -3,6 +3,8 @@ import { db, auth } from "./FirebaseConfig";
 import { collection, query, where, onSnapshot, orderBy, getDoc, doc, limit, getDocs } from "firebase/firestore";
 import UserSearch from "./UserSearch"; // Import UserSearch component
 
+
+
 function Sidebar({ onSelectConversation, onSelectUser, currentUserRole }) {
   const [conversations, setConversations] = useState([]);
   const [user, setUser] = useState(null);

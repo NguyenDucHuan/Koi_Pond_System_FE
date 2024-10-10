@@ -18,10 +18,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons"; // Import other icons
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon component
 import React from "react";
-import footerlogo from "../assets/images/logo-footer-1.png";
+import footerlogo from "../assets/images/logo.png";
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-10  mt-1">
+    <footer className="bg-orange-600 text-white py-10  mt-1">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4 max-w-[1200px]">
         {/* Company Info Section */}
         <div>

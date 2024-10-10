@@ -21,7 +21,7 @@ function AboutUsPage() {
     };
 
     const DescriptionSection = () => (
-        <section className="bg-gradient-to-r from-blue-100 to-indigo-100 py-16">
+        <section className="bg-gradient-to-r from-orange-100 to-yellow-100 py-16">
             <div className="container mx-auto px-4">
                 <h2 className="text-4xl font-bold text-center mb-8 text-gray-800">Về Dịch Vụ Của Chúng Tôi</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

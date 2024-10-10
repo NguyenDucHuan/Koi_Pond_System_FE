@@ -2,7 +2,18 @@ import React, { useState, useEffect } from "react";
 import { db, auth } from "./FirebaseConfig";
 import Sidebar from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import { collection, addDoc, query, orderBy, onSnapshot, where, getDocs, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  onSnapshot,
+  where,
+  getDocs,
+  doc,
+  getDoc,
+  setDoc,
+} from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"; // Import Firebase Storage functions
 import "./ChatWindow.css";
 
@@ -171,23 +182,27 @@ function ChatWindow() {
       <div className="chat-content" style={{ width: "70%", padding: "20px", display: "flex", flexDirection: "column" }}>
         {/* Chat Header */}
         <div className="chat-header">
-          <h3>Chat Window</h3>
-          {selectedConversationId && (
-            <button onClick={() => setSelectedConversationId(null)} className="chat-close-button">
-              Close Conversation
-            </button>
-          )}
+          
         </div>
 
         {/* Messages Display */}
         <div className="chat-messages">
           {messages.map((msg, index) => (
-            <div key={index} className="chat-message">
+            <div
+              key={index}
+              className={`chat-message ${
+                msg.senderId === user?.uid ? "chat-message-sent" : "chat-message-received"
+              }`} // Add different classes for sent and received messages
+            >
               <strong>{usernames[msg.senderId] || msg.senderEmail}:</strong>
               <span> {msg.text}</span>
-              {msg.formattedTime && <span style={{ marginLeft: "10px", color: "#757575" }}>({msg.formattedTime})</span>}
+              {msg.formattedTime && (
+                <span style={{ marginLeft: "10px", color: "#757575" }}>({msg.formattedTime})</span>
+              )}
               {/* Display image if the message contains an image URL */}
-              {msg.imageUrl && <img src={msg.imageUrl} alt="Sent Image" style={{ maxWidth: "200px", marginTop: "10px" }} />}
+              {msg.imageUrl && (
+                <img src={msg.imageUrl} alt="Sent Image" style={{ maxWidth: "200px", marginTop: "10px" }} />
+              )}
             </div>
           ))}
         </div>
