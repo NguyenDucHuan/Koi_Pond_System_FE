@@ -23,7 +23,7 @@ const ManagerUser = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       const token = user.accessToken;
       const response = await axios.get(
-        "http://localhost:5222/api/v1/account-manager/accounts",
+        "http://localhost:7222/api/v1/account-manager/accounts",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const ManagerUser = () => {
       const token = localStorage.getItem("accessToken");
       const newUser = { ...values, id };
 
-      await axios.post("http://localhost:5222/api/v1/users", newUser, {
+      await axios.post("http://localhost:7222/api/v1/users", newUser, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -76,7 +76,7 @@ const ManagerUser = () => {
       const user = JSON.parse(localStorage.getItem("user"));
       const token = user.accessToken;
       await axios.delete(
-        `http://localhost:5222/api/v1/account-manager/account/${userId}`,
+        `http://localhost:7222/api/v1/account-manager/account/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -107,7 +107,7 @@ const ManagerUser = () => {
     try {
       const token = localStorage.getItem("accessToken");
       await axios.put(
-        `http://localhost:5222/api/v1/users/${editingUser.id}`,
+        `http://localhost:7222/api/v1/users/${editingUser.id}`,
         values,
         {
           headers: {

@@ -22,7 +22,7 @@ function ChatFirebaseLogin() {
         // Get a reference to the 'users' collection and the user's document
         const userCollectionRef = collection(db, "users");
         const userDocRef = doc(userCollectionRef, userCredential.user.uid);
-        
+
         // Set user document in Firestore
         await setDoc(userDocRef, {
           displayName: email.split("@")[0],

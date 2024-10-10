@@ -16,10 +16,6 @@ const AdminLayout = () => {
                         <FiUsers className="mr-2" /> {/* Users icon */}
                         Users
                     </a>
-                    <a href="/admin/projects" className="flex items-center py-2 px-4 text-gray-600 hover:bg-gray-200">
-                        <FiClipboard className="mr-2" /> {/* Projects icon */}
-                        Projects
-                    </a>
                     <a href="/admin/create-blog" className="flex items-center py-2 px-4 text-gray-600 hover:bg-gray-200">
                         <FiFileText className="mr-2" /> {/* Blog icon */}
                         Blog

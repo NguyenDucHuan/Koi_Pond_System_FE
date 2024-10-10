@@ -35,6 +35,8 @@ const CreateBlog = () => {
         content: '',
         image: null,
         imagePreview: null,
+        imageUrl: '', // New field for image URL
+        videoUrl: '', // New field for video URL
     });
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -49,7 +51,7 @@ const CreateBlog = () => {
         const file = e.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onloadend = () => setFormData((prevData) => ({ ...prevData, imagePreview: reader.result }));
+            reader.onloadend = () => setFormData((prevData) => ({ ...prevData, imagePreview: reader.result, imageUrl: '' })); // Clear imageUrl when file is uploaded
             reader.readAsDataURL(file);
         }
     };
@@ -57,28 +59,30 @@ const CreateBlog = () => {
     // Form submission handler
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { title, content, imagePreview } = formData;
-        if (title && content && imagePreview) {
+        const { title, content, imagePreview, imageUrl, videoUrl } = formData;
+        const image = imagePreview || imageUrl; // Use imagePreview if present, otherwise use imageUrl
+        if (title && content && (image || videoUrl)) {
             const newBlog = {
                 id: Date.now(),
                 title,
                 content,
-                image: imagePreview,
+                image, // Can be either uploaded image (imagePreview) or image URL
+                videoUrl, // Video URL
             };
             const blogs = JSON.parse(localStorage.getItem('blogs')) || [];
             blogs.push(newBlog);
             localStorage.setItem('blogs', JSON.stringify(blogs));
 
             // Reset form after successful submission
-            setFormData({ title: '', content: '', image: null, imagePreview: null });
+            setFormData({ title: '', content: '', image: null, imagePreview: null, imageUrl: '', videoUrl: '' });
             setErrorMessage('');
             alert('Blog created successfully!');
         } else {
-            setErrorMessage('Please fill in all fields and upload an image.');
+            setErrorMessage('Please fill in all fields and upload an image or provide an image/video URL.');
         }
     };
 
-    const { title, content, imagePreview } = formData;
+    const { title, content, imagePreview, imageUrl, videoUrl } = formData;
 
     return (
         <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-8">
@@ -122,17 +126,51 @@ const CreateBlog = () => {
                         onChange={handleImageChange}
                         className="mt-1 block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer focus:outline-none"
                     />
-                    {imagePreview && (
-                        <div className="mt-4">
-                            <p className="text-sm text-gray-500">Image Preview:</p>
-                            <img
-                                src={imagePreview}
-                                alt="Selected"
-                                className="mt-2 w-full h-64 object-cover rounded-lg shadow-md"
-                            />
-                        </div>
-                    )}
                 </div>
+
+                {/* Image URL Field */}
+                <FormField
+                    id="imageUrl"
+                    label="Or Enter Image URL"
+                    value={imageUrl}
+                    onChange={(e) => {
+                        // Clear image preview when image URL is entered
+                        handleChange(e);
+                        setFormData((prevData) => ({ ...prevData, imagePreview: '' }));
+                    }}
+                    placeholder="Enter image URL"
+                />
+
+                {/* Video URL Field */}
+                <FormField
+                    id="videoUrl"
+                    label="Enter Video URL"
+                    value={videoUrl}
+                    onChange={handleChange}
+                    placeholder="Enter video URL"
+                />
+
+                {/* Media Preview */}
+                {imagePreview || imageUrl ? (
+                    <div className="mt-4">
+                        <p className="text-sm text-gray-500">Image Preview:</p>
+                        <img
+                            src={imagePreview || imageUrl}
+                            alt="Selected"
+                            className="mt-2 w-full h-64 object-cover rounded-lg shadow-md"
+                        />
+                    </div>
+                ) : null}
+
+                {videoUrl ? (
+                    <div className="mt-4">
+                        <p className="text-sm text-gray-500">Video Preview:</p>
+                        <video controls className="mt-2 w-full h-64 object-cover rounded-lg shadow-md">
+                            <source src={videoUrl} type="video/mp4" />
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                ) : null}
 
                 {/* Submit and Preview Buttons */}
                 <div className="flex justify-between">
@@ -145,7 +183,7 @@ const CreateBlog = () => {
                     {title && content && (
                         <button
                             type="button"
-                            onClick={() => alert(`Preview:\nTitle: ${title}\nContent: ${content}`)}
+                            onClick={() => alert(`Preview:\nTitle: ${title}\nContent: ${content}\nVideo URL: ${videoUrl}`)}
                             className="inline-flex justify-center py-3 px-6 border border-gray-300 shadow-sm text-lg font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Preview Blog

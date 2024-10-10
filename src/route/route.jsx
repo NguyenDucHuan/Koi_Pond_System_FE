@@ -13,10 +13,10 @@ import HomePage from "../pages/homePage";
 import Login from "../pages/login";
 import Register from "../pages/Register";
 import StaffPage from "../pages/Staff/StaffPage";
-import BlogPage from "../pages/BlogPage";
 import CreateBlog from "../pages/Admin/CreateBlog ";
 import BlogList from "../components/BlogList";
 import BlogDetail from "../components/BlogDetail";
+import Contact from "../pages/Contact";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -26,6 +26,11 @@ export const routes = createBrowserRouter([
       {
         index: true,
         element: <HomePage />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+        errorElement: <ErrorPage />
       },
       {
         path: "/blog",
