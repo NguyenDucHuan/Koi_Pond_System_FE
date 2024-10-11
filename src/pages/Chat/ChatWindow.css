@@ -1,6 +1,7 @@
 .chat-window {
   display: flex;
   height: 100vh;
+
   background-color: #FFF8E1;
 }
 
@@ -131,4 +132,5 @@
 .chat-upload-button:hover {
   background-color: #FFB74D;
 }
+
 

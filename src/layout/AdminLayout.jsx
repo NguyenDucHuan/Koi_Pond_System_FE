@@ -1,27 +1,33 @@
+
+
 import React from 'react';
-import { Outlet, Navigate } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { FiHome, FiUsers, FiClipboard, FiFileText } from 'react-icons/fi'; // Import icons from react-icons
 
 const AdminLayout = () => {
-
     return (
         <div className="flex h-screen bg-gray-100">
-            <aside className="w-80 bg-yellow-100 shadow-md ">
+            <aside className="w-64 bg-white shadow-md">
                 {/* Admin sidebar navigation */}
-                
-                <nav className="mt-5 space-y-2">
-  <a href="/admin" className="block py-3 px-4 rounded-lg text-gray-700 hover:bg-orange-500 hover:text-white transition duration-200 font-semibold">
-    Dashboard
-  </a>
-  <a href="/admin/users" className="block py-3 px-4 rounded-lg text-gray-700 hover:bg-orange-500 hover:text-white transition duration-200 font-semibold">
-    Users
-  </a>
-  <a href="/admin/projects" className="block py-3 px-4 rounded-lg text-gray-700 hover:bg-orange-500 hover:text-white transition duration-200 font-semibold">
-    Projects
-  </a>
-  <a href="/admin/create-blog" className="block py-3 px-4 rounded-lg text-gray-700 hover:bg-orange-500 hover:text-white transition duration-200 font-semibold">
-    Blog
-  </a>
-</nav>
+                <nav className="mt-5">
+                    <a href="/admin" className="flex items-center py-2 px-4 text-gray-600 hover:bg-gray-200">
+                        <FiHome className="mr-2" /> {/* Home icon for Dashboard */}
+                        Dashboard
+                    </a>
+                    <a href="/admin/users" className="flex items-center py-2 px-4 text-gray-600 hover:bg-gray-200">
+                        <FiUsers className="mr-2" /> {/* Users icon */}
+                        Users
+                    </a>
+                    <a href="/admin/create-blog" className="flex items-center py-2 px-4 text-gray-600 hover:bg-gray-200">
+                        <FiFileText className="mr-2" /> {/* Blog icon */}
+                        Create Blog
+                    </a>
+                    <a href="/admin/manage-blog" className="flex items-center py-2 px-4 text-gray-600 hover:bg-gray-200">
+                        <FiFileText className="mr-2" /> {/* Blog icon */}
+                        Manage Blog
+                    </a>
+                    {/* Add more admin navigation items with icons as needed */}
+                </nav>
             </aside>
             <main className="flex-1 p-10">
                 <Outlet />
