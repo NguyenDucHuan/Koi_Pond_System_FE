@@ -6,16 +6,16 @@ import { LuFish } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { AuthContext } from "../context/authContext";
+import { FaHeadphonesAlt, FaHeadset } from "react-icons/fa";
 const AdminSidebar = () => {
   const navigate = useNavigate();
   const { dispatch } = useContext(AuthContext);
-  const handleLogout = async () => {
+  const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
-    const res = await axios.post(
-      "http://localhost:5222/api/v1/authenticate/logout"
-    );
-    toast.success(res.data.message);
-    navigate("/login");
+    localStorage.removeItem("user");
+    localStorage.removeItem("access_token");
+    sessionStorage.removeItem("user");
+    toast.success("Đăng xuất thành công");
   };
 
   return (
@@ -29,7 +29,14 @@ const AdminSidebar = () => {
           <FiHome className="mr-2" /> {/* Home icon for Dashboard */}
           Dashboard
         </a>
-
+        {/* Consultation */}
+        <a
+          href="/admin/manage-consultation"
+          className="flex items-center py-2 px-4 text-gray-600 hover:bg-gray-200"
+        >
+          <FaHeadset className="mr-2" /> {/* Consultation icon */}
+          Consultation
+        </a>
         {/* Users link */}
         <a
           href="/admin/manage-users"

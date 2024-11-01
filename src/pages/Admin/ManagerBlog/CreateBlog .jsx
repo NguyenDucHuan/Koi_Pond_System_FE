@@ -1,13 +1,13 @@
 import { Editor } from "@tinymce/tinymce-react";
 
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import axiosInstance from "../../axios/axiosInstance";
-import FormField from "../../components/FormField";
-import Loading from "../../components/Loading";
-import { storage } from "../../firebase/FirebaseConfig";
+import FormField from "../../../components/FormField";
+import { storage } from "../../../firebase/FirebaseConfig";
+import axiosInstance from "../../../axios/axiosInstance";
+import Loading from "../../../components/Loading";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const CreateBlog = () => {
   const navigate = useNavigate();

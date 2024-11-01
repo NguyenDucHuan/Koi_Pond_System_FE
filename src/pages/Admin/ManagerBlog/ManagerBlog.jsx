@@ -1,9 +1,9 @@
 import { EditOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../components/Loading";
+import axios from "axios";
+import Loading from "../../../components/Loading";
 
 const ManagerBlog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -80,7 +80,7 @@ const ManagerBlog = () => {
                 />
                 <Button
                   icon={<EditOutlined />}
-                  onClick={() => handleEdit(blog.id)}
+                  onClick={() => handleEdit(blog._id)}
                 >
                   Edit
                 </Button>

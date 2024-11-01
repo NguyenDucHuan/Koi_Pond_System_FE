@@ -10,10 +10,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 
+
 const { Title, Paragraph } = Typography;
 
 const Introduction = () => {
     const navigate = useNavigate();
+    
     const features = [
         {
             icon: <FontAwesomeIcon icon={faCompass} className="text-4xl text-blue-600" />,
@@ -56,7 +58,7 @@ const Introduction = () => {
                     "Nuôi cá dưỡng tâm, nuôi chim dưỡng chí, nuôi cây dưỡng thần"
                 </Paragraph>
                 <div className="flex justify-center gap-4">
-                    <Button type="primary" size="large" className="bg-blue-600 hover:bg-blue-700">
+                    <Button onClick={() => navigate('/consultation')} type="primary" size="large" className="bg-blue-600 hover:bg-blue-700">
                         <FontAwesomeIcon icon={faCompass} className="mr-2" />
                         Tư Vấn Ngay
                     </Button>
