@@ -9,17 +9,17 @@ import {
   Tabs,
 } from "antd";
 
+import { format, parseISO } from "date-fns";
+import moment from "moment/moment";
 import React, { useCallback, useContext, useEffect, useRef, useState } from "react";
-import axiosInstance from "../../axios/axiosInstance";
+import { CiWallet } from "react-icons/ci";
 import { FaBirthdayCake, FaTransgender } from "react-icons/fa";
 import { TbZodiacCancer } from "react-icons/tb";
-import { CiWallet } from "react-icons/ci";
-import { format, parseISO } from "date-fns";
-import { AuthContext } from "../../context/authContext";
 import { Link, useNavigate } from "react-router-dom";
-import moment from "moment/moment";
 import { toast } from "react-toastify";
+import axiosInstance from "../../axios/axiosInstance";
 import Loading from "../../components/Loading";
+import { AuthContext } from "../../context/authContext";
 
 
 const UserInfo = ({ user, showEditModal, showDepositModal }) => {
@@ -255,7 +255,7 @@ const Profile = () => {
     try {
       const res = await axiosInstance.post(`/deposit`, {
         amount,
-        returnUrl: "http://localhost:3000/profile",
+        returnUrl: "https://koi-pond-system-fe.vercel.app/profile",
       });
 
       window.location.href = res.data.paymentUrl;
