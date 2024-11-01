@@ -363,7 +363,7 @@ const CreateBlog = () => {
           </label>
 
           <Editor
-            apiKey="rzelnlucawqxdndppr49miokeqs2tvdf8tjz1dg182z52ucv"
+            apiKey="9kv9bo3g9ip4unmc9p7bjk32rpgsbmcuqob3qv3s3qplwhug"
             value={content}
             init={{
               height: 500,
