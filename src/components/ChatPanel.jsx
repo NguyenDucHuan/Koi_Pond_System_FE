@@ -5,13 +5,13 @@ import {
   ClockCircleOutlined,
   SendOutlined,
 } from "@ant-design/icons";
-import { getDatabase, onValue, push, ref, set } from "firebase/database";
-import React, { useEffect, useRef, useState } from "react";
-import parse from 'html-react-parser';
-import { useLocation, useParams } from "react-router-dom";
 import { Button, Modal } from "antd";
-import axiosInstance from "../axios/axiosInstance";
+import { getDatabase, onValue, push, ref } from "firebase/database";
+import parse from 'html-react-parser';
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import axiosInstance from "../axios/axiosInstance";
 const ChatPanel = () => {
   const { id } = useParams();
   const location = useLocation();
@@ -48,6 +48,7 @@ const ChatPanel = () => {
     }
   };
 
+  
   const handleCompleteConsultation = async () => {
     try {
       setLoading(true);
