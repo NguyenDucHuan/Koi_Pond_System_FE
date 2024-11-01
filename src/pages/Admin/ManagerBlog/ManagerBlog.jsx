@@ -1,8 +1,8 @@
 import { EditOutlined } from "@ant-design/icons";
 import { Button } from "antd";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Loading from "../../../components/Loading";
 
 const ManagerBlog = () => {
@@ -14,7 +14,7 @@ const ManagerBlog = () => {
     setLoading(true);
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/v1/blogs");
+        const res = await axios.get("https://feng-shui-master.vercel.app/api/v1/blogs");
         setBlogs(res.data.advertisements);
         console.log(res.data.advertisements);
       } catch (err) {

@@ -26,7 +26,7 @@ const LoginPage = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/v1/login",
+        "https://feng-shui-master.vercel.app/api/v1/login",
         credentials
       );
 

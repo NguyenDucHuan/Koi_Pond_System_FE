@@ -1,9 +1,9 @@
 import { Editor } from '@tinymce/tinymce-react';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import FormField from '../../components/FormField';
-import axios from 'axios';
 
 const CreateDirection = () => {
     const navigate = useNavigate();
@@ -25,7 +25,7 @@ const CreateDirection = () => {
     useEffect(() => {
         const getdata = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/api/v1/destinies`);
+                const response = await axios.get(`https://feng-shui-master.vercel.app/api/v1/destinies`);
                 setDestinies(response.data.destinies);
                 setLoading(false);
             } catch (error) {
@@ -46,7 +46,7 @@ const CreateDirection = () => {
                     content,
                     destiny,
                 };
-                const res = await axios.post('http://localhost:8080/api/v1/direction', directionData);
+                const res = await axios.post('https://feng-shui-master.vercel.app/api/v1/direction', directionData);
                 toast.success(res.data.message);
             } catch (error) {
                 console.error("Error saving blog:", error);
