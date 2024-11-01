@@ -1,9 +1,9 @@
-import React, {  useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Loading from "./../../components/Loading";
+import { UserAddOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { format } from "date-fns";
-import { UserAddOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Loading from "./../../components/Loading";
 const BlogDetail = () => {
   const { id } = useParams(); // Retrieve id from URL
   const [blog, setBlog] = useState(null);
@@ -13,7 +13,7 @@ const BlogDetail = () => {
     const fetchBlog = async () => {
       setLoading(true);
       try {
-        const res = await axios.get(`http://localhost:8080/api/v1/blog/${id}`);
+        const res = await axios.get(`https://feng-shui-master.vercel.app/api/v1/blog/${id}`);
         setBlog(res.data.advertisement);
         console.log(res.data.advertisement);
 

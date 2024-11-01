@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { DatePicker, Select, Card, Collapse, Typography, Divider, Row, Col } from 'antd';
-import moment from 'moment';
+import { Card, Col, Collapse, DatePicker, Divider, Row, Select, Typography } from 'antd';
 import axios from 'axios';
+import moment from 'moment';
+import React, { useState } from 'react';
 
 
 const { Title, Text } = Typography;
@@ -17,7 +17,7 @@ const DateGenderForm = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/calculation-feng-shui",
+        "https://feng-shui-master.vercel.app/api/v1/calculation-feng-shui",
         {
           dateOfBirth,
           gender,

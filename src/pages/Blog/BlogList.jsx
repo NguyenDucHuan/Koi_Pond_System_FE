@@ -12,7 +12,7 @@ const BlogList = () => {
     setLoading(true);
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/api/v1/blogs");
+        const res = await axios.get("https://feng-shui-master.vercel.app/api/v1/blogs");
         setBlogs(res.data.advertisements);
       } catch (err) {
         console.error(err);

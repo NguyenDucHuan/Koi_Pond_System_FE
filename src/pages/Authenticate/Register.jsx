@@ -29,7 +29,7 @@ const RegisterPage = () => {
     setIsLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:8080/api/v1/register",
+        "https://feng-shui-master.vercel.app/api/v1/register",
         formData
       );
       toast.success(res.data.message);
