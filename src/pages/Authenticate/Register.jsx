@@ -60,43 +60,26 @@ const RegisterPage = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <InputField
               label="Tên Tài Khoản"
-              name="registerAccount.userName"
+              name="name"
               onChange={handleChange}
             />
             <InputField
               label="Mật Khẩu"
-              name="registerAccount.password"
+              name="password"
               type="password"
               onChange={handleChange}
             />
             <InputField
               label="Xác Nhận Mật Khẩu"
-              name="registerAccount.confirmPassword"
+              name="confirmPassword"
               type="password"
               onChange={handleChange}
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <InputField
-                label="Họ"
-                name="registerUserProfile.lastName"
-                onChange={handleChange}
-              />
-              <InputField
-                label="Tên"
-                name="registerUserProfile.firstName"
-                onChange={handleChange}
-              />
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <InputField
                 label="Email"
                 name="registerUserProfile.email"
                 type="email"
-                onChange={handleChange}
-              />
-              <InputField
-                label="Số Điện Thoại"
-                name="registerUserProfile.phone"
                 onChange={handleChange}
               />
             </div>
