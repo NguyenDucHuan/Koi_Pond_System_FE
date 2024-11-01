@@ -1,21 +1,23 @@
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { Menu, Transition } from "@headlessui/react";
+import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faBlog,
+  faHome,
   faBook,
   faCompass,
-  faCreditCard,
-  faHome,
   faNewspaper,
-  faRectangleAd,
+  faBlog,
+  faUser,
+  faCreditCard,
   faSignOutAlt,
-  faUser
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Menu, Transition } from '@headlessui/react';
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import logo from '../assets/images/logo.webp';
-import { AuthContext } from '../context/authContext';
+  faHeadset,
+  faRectangleAd,
+} from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../context/authContext";
+import logo from "../assets/images/logo.webp";
+import { CiWallet } from "react-icons/ci";
 
 const NavLink = ({ to, children, icon }) => (
   <Link
@@ -33,6 +35,7 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("user");
+    localStorage.removeItem("access_token");
     sessionStorage.removeItem("user");
     toast.success("Đăng xuất thành công");
   };
@@ -41,9 +44,9 @@ const Navbar = () => {
     { label: "Home", to: "/", icon: faHome },
     { label: "Introduction", to: "/introduction", icon: faBook },
     { label: "Feng Shui", to: "/feng-shui", icon: faCompass },
-    { label: "News", to: "/news", icon: faNewspaper },
+    { label: "Contact", to: "/contact", icon: faHeadset },
     { label: "Blog", to: "/blog", icon: faBlog },
-    {label : "Package" ,to : "/package", icon: faRectangleAd}
+    { label: "Package", to: "/package", icon: faRectangleAd }
   ];
 
   return (
@@ -52,11 +55,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <img
-              src={logo}
-              alt="Logo"
-              className="h-10 w-auto"
-            />
+            <img src={logo} alt="Logo" className="h-10 w-auto" />
           </Link>
 
           {/* Navigation Links */}
@@ -94,6 +93,10 @@ const Navbar = () => {
                   <span className="text-sm font-medium hidden md:block">
                     {user.name}
                   </span>
+                  <span className="flex justify-center items-center border border-gray-300 rounded px-2 py-1">
+                    <CiWallet className="mr-2" />{" "}
+                    {new Intl.NumberFormat("vi-VN").format(user?.balance)}đ
+                  </span>
                 </Menu.Button>
 
                 <Transition
@@ -109,7 +112,7 @@ const Navbar = () => {
                       {({ active }) => (
                         <Link
                           to="/profile"
-                          className={`${active ? 'bg-gray-100' : ''
+                          className={`${active ? "bg-gray-100" : ""
                             } flex items-center gap-2 px-4 py-2 text-sm text-gray-700`}
                         >
                           <FontAwesomeIcon icon={faUser} className="w-4 h-4" />
@@ -121,10 +124,13 @@ const Navbar = () => {
                       {({ active }) => (
                         <Link
                           to="/billing"
-                          className={`${active ? 'bg-gray-100' : ''
+                          className={`${active ? "bg-gray-100" : ""
                             } flex items-center gap-2 px-4 py-2 text-sm text-gray-700`}
                         >
-                          <FontAwesomeIcon icon={faCreditCard} className="w-4 h-4" />
+                          <FontAwesomeIcon
+                            icon={faCreditCard}
+                            className="w-4 h-4"
+                          />
                           Billing
                         </Link>
                       )}
@@ -133,10 +139,13 @@ const Navbar = () => {
                       {({ active }) => (
                         <button
                           onClick={handleLogout}
-                          className={`${active ? 'bg-gray-100' : ''
+                          className={`${active ? "bg-gray-100" : ""
                             } flex items-center gap-2 px-4 py-2 text-sm text-red-600 w-full text-left`}
                         >
-                          <FontAwesomeIcon icon={faSignOutAlt} className="w-4 h-4" />
+                          <FontAwesomeIcon
+                            icon={faSignOutAlt}
+                            className="w-4 h-4"
+                          />
                           Đăng xuất
                         </button>
                       )}

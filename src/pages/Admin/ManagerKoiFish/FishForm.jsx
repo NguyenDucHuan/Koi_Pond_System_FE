@@ -1,18 +1,18 @@
-import { PlusOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from "react";
 import {
-    Button,
     Form,
     Input,
-    Modal,
     Select,
-    Typography,
     Upload,
+    Button,
+    Typography,
+    Modal,
 } from "antd";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify";
+import { PlusOutlined } from "@ant-design/icons";
+import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../../../axios/axiosInstance";
+import { toast } from "react-toastify";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../../firebase/FirebaseConfig";
 
 const { Title } = Typography;
@@ -55,7 +55,6 @@ const FishForm = () => {
         try {
             setLoading(true);
             const response = await axiosInstance.get(`/get-koi-by-id/${id}`);
-            console.log(response.data.koiFishBreed);
             const fishData = response.data.koiFishBreed;
             form.setFieldsValue({
                 name: fishData.name,
@@ -63,6 +62,7 @@ const FishForm = () => {
                 image_url: fishData.image_url,
                 zodiac_element: fishData.zodiac_element._id
             });
+            console.log("Fish data:", fishData);
 
             // If there's an existing image, add it to fileList
             if (fishData.image_url) {

@@ -1,5 +1,5 @@
-import { Button, Form, Input, Select, Spin, Switch, Typography } from "antd";
 import React, { useEffect, useState } from "react";
+import { Button, Form, Input, Select, Spin, Switch, Typography } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../axios/axiosInstance";
@@ -10,7 +10,6 @@ const { Option } = Select;
 const PondForm = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const [pondFeatures, setPondFeatures] = useState([]);
   const [zodiacElements, setZodiacElements] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -40,7 +39,6 @@ const PondForm = () => {
         status: response.data.pondFeature.status === "Active",
       };
       form.setFieldsValue(data);
-      setPondFeatures(response.data.pondFeature);
     } catch (error) {
       console.error("Error fetching zodiac elements:", error);
       toast.error("Failed to fetch zodiac elements");

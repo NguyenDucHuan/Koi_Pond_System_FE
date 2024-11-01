@@ -1,40 +1,47 @@
 import { createBrowserRouter } from "react-router-dom";
 import AdminLayout from "../layout/AdminLayout";
 import CustomerLayout from "../layout/CustomerLayout";
-import Services from "../pages//servicesDisplay";
-import AccountProfile from "../pages/AccountProfile";
-import CreateBlog from "../pages/Admin/CreateBlog ";
-import CreateDirection from "../pages/Admin/CreateDirection";
+import AccountProfile from "../pages/MainPage/AccountProfile";
+import CreateBlog from "../pages/Admin/ManagerBlog/CreateBlog ";
 import Dashboard from "../pages/Admin/Dashboard";
-import ManagerBlog from "../pages/Admin/ManagerBlog";
-import FishForm from "../pages/Admin/ManagerKoiFish/FishForm";
-import ManagerKoiFish from "../pages/Admin/ManagerKoiFish/ManagerKoiFish";
-import ManagerPacakge from "../pages/Admin/ManagerPackage/ManagerPackage";
-import PackageForm from "../pages/Admin/ManagerPackage/PackageForm";
+import ManagerBlog from "../pages/Admin/ManagerBlog/ManagerBlog";
 import PondForm from "../pages/Admin/ManagerPond/PondForm";
 import ManagerUser from "../pages/Admin/ManagerUser/ManagerUser";
 import UserForm from "../pages/Admin/ManagerUser/UserForm";
 import ChangePassword from "../pages/changePassword";
-import ChatWindow from "../pages/Chat/ChatWindow";
+import ErrorPage from "../pages/errorPage";
+import HomePage from "../pages/MainPage/homePage";
+import Login from "../pages/Authenticate/login";
+import CreateDirection from "../pages/Admin/CreateDirection";
 import Earth from "../pages/Elements/Earth";
 import Fire from "../pages/Elements/Fire";
 import Water from "../pages/Elements/Water";
 import Wood from "../pages/Elements/Wood";
-import ErrorPage from "../pages/errorPage";
-import HomePage from "../pages/homePage";
-import Introduction from "../pages/Introduction";
-import Login from "../pages/login";
-import Register from "../pages/Register";
+import Register from "../pages/Authenticate/Register";
 import ProtectedRoute from "./../config/ProtectedRoute";
 import ManagerPond from "./../pages/Admin/ManagerPond/ManagerPond";
 import BlogDetail from "./../pages/Blog/BlogDetail";
-import BlogList from './../pages/Blog/BlogList';
-import CancelPage from "./../pages/CancelPage";
 import Metal from "./../pages/Elements/Metal";
-import FengShui from "./../pages/FengShui";
-import Package from "./../pages/Package/Package";
-import PackageDatail from "./../pages/Package/PackageDetail";
-import SuccessPage from "./../pages/SuccessPage";
+import FengShui from "../pages/MainPage/FengShui";
+import Introduction from "../pages/MainPage/Introduction";
+import BlogList from './../pages/Blog/BlogList';
+import ManagerKoiFish from "../pages/Admin/ManagerKoiFish/ManagerKoiFish";
+import FishForm from "../pages/Admin/ManagerKoiFish/FishForm";
+import Billing from "../pages/Payment/Billing";
+import EditBlog from "../pages/Admin/ManagerBlog/EditBlog";
+import Consultation from "../pages/MainPage/Consultation";
+import ManagerConsultation from "../pages/Admin/ManagerConsultation/ManagerConsultation";
+import ChatPanel from "../components/ChatPanel";
+import PackageList from "../pages/Package/Package";
+import SuccessPage from "../pages/Payment/SuccessPage";
+import CancelPage from "../pages/Payment/CancelPage";
+import PackageDetail from "../pages/Package/PackageDetail";
+import ManagerPackage from "../pages/Admin/ManagerPackage/ManagerPackage";
+import PackageForm from "../pages/Admin/ManagerPackage/PackageForm";
+import UserConsultation from "../pages/MainPage/UserConsultation";
+import CustomerChatPanel from "../components/CustomerChatPanel";
+import CreateBlogUser from "../pages/Blog/CreateBlogUser";
+import EditBlogUser from "../pages/Blog/EditBlogUser";
 export const routes = createBrowserRouter([
   {
     path: "/",
@@ -47,41 +54,77 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/package",
-         element: <Package />,
-         errorElement: <ErrorPage />,
+        element: <PackageList />,
+        errorElement: <ErrorPage />,
       },
-      { path: "/success", 
-        element: <SuccessPage />, 
-        errorElement: <ErrorPage /> }
+      {
+        path: "/success",
+        element: <SuccessPage />,
+        errorElement: <ErrorPage />
+      }
       ,
       {
         path: "/cancel",
-         element: <CancelPage />,
-         errorElement: <ErrorPage />,
+        element: <CancelPage />,
+        errorElement: <ErrorPage />,
       },
       {
         path: "/package/:id",
-        element: <PackageDatail />,
-        errorElement: <ErrorPage />,}
+        element: <PackageDetail />,
+        errorElement: <ErrorPage />,
+      }
       ,
       {
         path: "/feng-shui",
         element: <FengShui />,
         errorElement: <ErrorPage />,
-      },{
-        path: "/blog",
-        element: <BlogList />,
+      },
+      {
+        path: "/consultation",
+        element: (
+          <ProtectedRoute requiredRoles={["User"]}>
+            <Consultation />
+          </ProtectedRoute>
+        ),
         errorElement: <ErrorPage />,
       },
       {
         path: "/contact",
         element: (
-          <ProtectedRoute requiredRoles={["Customer"]}>
-            <ChatWindow />
+          <ProtectedRoute requiredRoles={["User"]}>
+            <UserConsultation />
           </ProtectedRoute>
         ),
         errorElement: <ErrorPage />,
       },
+      {
+        path: "/contact/:id",
+        element: (
+          <ProtectedRoute requiredRoles={["User"]}>
+            <CustomerChatPanel />
+          </ProtectedRoute>
+        ),
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/create-blog",
+        element: (
+          <ProtectedRoute requiredRoles={["User"]}>
+            <CreateBlogUser />
+          </ProtectedRoute>
+        ),
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/edit-blog/:id",
+        element: (
+          <ProtectedRoute requiredRoles={["User"]}>
+            <EditBlogUser />
+          </ProtectedRoute>
+        ),
+        errorElement: <ErrorPage />,
+      },
+
       {
         path: "/blog",
         element: <BlogList />,
@@ -107,15 +150,20 @@ export const routes = createBrowserRouter([
         element: <ChangePassword />,
         errorElement: <ErrorPage />,
       },
-      {
-        path: "/services",
-        element: <Services />,
-        errorElement: <ErrorPage />,
-      },
       { path: "/introduction", element: <Introduction />, errorElement: <ErrorPage /> },
       {
         path: "/elements/metal",
         element: <Metal />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "/profile",
+        element: <AccountProfile />,
+        errorElement: <ErrorPage />,
+      },
+      {
+        path: "billing",
+        element: <Billing />,
         errorElement: <ErrorPage />,
       },
       {
@@ -173,11 +221,6 @@ export const routes = createBrowserRouter([
         element: <ManagerUser />,
       },
       {
-        path: "packages",
-         element: <ManagerPacakge />,
-      }
-      ,
-      {
         path: "add-user",
         element: <UserForm />,
       },
@@ -199,7 +242,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "edit-blog/:id",
-        element: <CreateBlog />,
+        element: <EditBlog />,
       },
       {
         path: "manager-pond",
@@ -224,7 +267,20 @@ export const routes = createBrowserRouter([
       {
         path: "edit-koi-fish/:id",
         element: <FishForm />
-      },{
+      },
+      {
+        path: "manage-consultation",
+        element: <ManagerConsultation />,
+      },
+      {
+        path: "consultation/:id",
+        element: <ChatPanel />,
+      },
+      {
+        path: "packages",
+        element: <ManagerPackage />,
+      },
+      {
         path: "add-package",
         element: <PackageForm />,
       }
@@ -232,25 +288,6 @@ export const routes = createBrowserRouter([
       {
         path: "edit-package/:id",
         element: <PackageForm />,
-      },
-    ],
-  },
-  {
-    path: "/customer",
-    element: (
-      <ProtectedRoute requiredRoles={["Customer"]}>
-        <CustomerLayout />
-      </ProtectedRoute>
-    ),
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "index",
-        element: <HomePage />,
-      },
-      {
-        path: "profile",
-        element: <AccountProfile />,
       },
     ],
   },

@@ -1,23 +1,23 @@
-import { MailOutlined, UserOutlined } from '@ant-design/icons';
-import {
-    Button,
-    Card,
-    Col,
-    DatePicker,
-    Divider,
-    Form,
-    Input,
-    Row,
-    Select,
-    Switch,
-    Typography,
-} from "antd";
-import moment from 'moment';
 import React, { useEffect, useState } from "react";
+import {
+  Button,
+  Card,
+  Col,
+  DatePicker,
+  Form,
+  Input,
+  Row,
+  Select,
+  Switch,
+  Typography,
+  Divider,
+} from "antd";
+import { UserOutlined, MailOutlined } from '@ant-design/icons';
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import axiosInstance from "../../../axios/axiosInstance";
 import Loading from "../../../components/Loading";
+import moment from 'moment';
 
 const { Option } = Select;
 const { Title } = Typography;
@@ -57,7 +57,7 @@ const UserForm = () => {
           name: user.name,
           gender: user.gender,
           birthday: birthdayMoment,
-          status: user.status ?? true,
+          status: user.status ? "Active" : "Inactive",
           roleName: user.role
         };
         setFormData(userData);
