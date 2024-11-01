@@ -78,7 +78,7 @@ const RegisterPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <InputField
                 label="Email"
-                name="registerUserProfile.email"
+                name="email"
                 type="email"
                 onChange={handleChange}
               />
@@ -86,20 +86,20 @@ const RegisterPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <InputField
                 label="Ngày Sinh"
-                name="registerUserProfile.birthday"
+                name="birthday"
                 type="date"
                 onChange={handleChange}
               />
               <div>
                 <label
-                  htmlFor="registerUserProfile.gender"
+                  htmlFor="gender"
                   className="block text-sm font-medium text-gray-700 mb-1"
                 >
                   Giới Tính
                 </label>
                 <select
-                  id="registerUserProfile.gender"
-                  name="registerUserProfile.gender"
+                  id="gender"
+                  name="gender"
                   onChange={handleChange}
                   className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                 >
